@@ -6,11 +6,13 @@
 		"php",
 		"framework",
 		"mvc",
-		"orm",
+		"views",
+		"template",
 		"template engine"
 	],
 	"require" : {
-		"php" : ">=7.4"
+		"php" : ">=7.4",
+		"phpmv/ubiquity": "dev-master"
 	},
 	"license" : "Apache-2.0",
 	"authors" : [{
