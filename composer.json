@@ -1,0 +1,39 @@
+{
+	"name" : "phpmv/ubiquity-plates",
+	"description" : "Ubiquity Plates template engine",
+	"type" : "extension",
+	"keywords" : [
+		"php",
+		"framework",
+		"mvc",
+		"orm",
+		"template engine"
+	],
+	"require" : {
+		"php" : ">=7.4"
+	},
+	"license" : "Apache-2.0",
+	"authors" : [{
+			"name" : "Jean-Christophe HERON",
+			"email" : "myaddressmail@gmail.com",
+			"role" : "Project creator"
+		},
+		{
+			"name" : "Guillaume JACOPIN",
+			"email" : "guillaume.jacopin@sts-sio-caen.info",
+			"role" : "Lead developer"
+		}
+	],
+	"autoload" : {
+		"psr-4" : {
+			"Ubiquity\\" : "src/Ubiquity/"
+		}
+	},
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "1.0.x-dev"
+		}
+	},
+	"require-dev" : {
+	}
+}
