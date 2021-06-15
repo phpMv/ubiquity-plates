@@ -12,7 +12,8 @@
 	],
 	"require" : {
 		"php" : ">=7.4",
-		"phpmv/ubiquity": "dev-master"
+		"phpmv/ubiquity": "dev-ubiquity-templates",
+		"league/plates": "^3.4"
 	},
 	"license" : "Apache-2.0",
 	"authors" : [{
