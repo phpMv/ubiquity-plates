@@ -5,10 +5,6 @@ namespace Ubiquity\views\engine;
 use League\Plates\Engine;
 use League\Plates\Template\Functions;
 use League\Plates\Template\Template;
-use Twig\Environment;
-use Twig\TwigFunction;
-use Twig\TwigTest;
-use Twig\Loader\FilesystemLoader;
 use Ubiquity\cache\CacheManager;
 use Ubiquity\controllers\Router;
 use Ubiquity\controllers\Startup;
@@ -23,13 +19,13 @@ use Ubiquity\assets\AssetsManager;
 use Ubiquity\views\View;
 
 /**
- * Ubiquity Twig template engine.
+ * Ubiquity Plates template engine.
  *
- * Ubiquity\views\engine$Twig
+ * Ubiquity\views\engine$Plates
  * This class is part of Ubiquity
  *
- * @author jcheron <myaddressmail@gmail.com>
- * @version 1.0.10
+ * @author jcheron <guillaume.jacopin@sts-sio-caen.info>
+ * @version 0.0.0
  *
  */
 class Plates extends TemplateEngine {
@@ -59,14 +55,12 @@ class Plates extends TemplateEngine {
 
 		$this->addFunction ('t',function ($context, $id, array $parameters = array (), $domain = null, $locale = null) {
 			$trans = TranslatorManager::trans ( $id, $parameters, $domain, $locale );
-			echo $trans;
-			return $this->plates->createTemplate ( $trans )->render ( $context );
+			return $trans;
 		});
 
 		$this->addFunction ('tc',function ($context, $id, array $choice, array $parameters = array (), $domain = null, $locale = null) {
 			$trans = TranslatorManager::transChoice ( $id, $choice, $parameters, $domain, $locale );
-			echo $trans;
-			return $this->plates->createTemplate ( $trans )->render ( $context );
+			return $trans;
 		});
 	}
 
