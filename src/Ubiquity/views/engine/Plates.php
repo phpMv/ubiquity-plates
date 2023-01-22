@@ -71,7 +71,7 @@ class Plates extends TemplateEngine {
 	}
 
 	protected function fixViewName(string $viewName): string {
-		return \preg_replace('@^(.*?)/@','@$1/',$viewName);
+		return \preg_replace('@^(.*?)/@','@$1::',$viewName);
 	}
 
 	public function addFunction(string $name, $callback, array $options=[]): void {
