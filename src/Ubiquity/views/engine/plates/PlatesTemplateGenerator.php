@@ -96,7 +96,7 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 	}
 
 	public function getNonce(): string {
-		return $this->openExpressionTag . "\$nonce??''" . $this->closeExpressionTag;
+		return $this->openVarTag . "\$nonce??''" . $this->closeVarTag;
 	}
 
 	public function getNonceArray(): string {
@@ -104,7 +104,7 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 	}
 
 	public function getSelf(): string {
-		return $this->openExpressionTag . '$this->getName()' . $this->closeExpressionTag;
+		return $this->openVarTag . '$this->getName()' . $this->openVarTag;
 	}
 
 	private function postProcess(string $code): string {
@@ -113,8 +113,7 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 
 	public function parseFromTwig(string $code): string {
 		$parser=new TemplateParser($this);
-		$code = $parser->parseFileContent($code);
-		return $this->postProcess($code);
+		return $parser->parseFileContent($code);
 	}
 
 }
