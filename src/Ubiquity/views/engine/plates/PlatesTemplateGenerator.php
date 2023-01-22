@@ -38,12 +38,12 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 	public function insertVariable(string $name, bool $safe = false): string {
 		$name = \str_replace('.', '->', $name);
 		if (UString::contains('(', $name)) {
-			return $this->openVarTag . $this->safe($name, $safe) . $this->closeVarTag;
+			return $this->openVarTag . $this->escape($name, $safe) . $this->closeVarTag;
 		}
-		return $this->openVarTag . $this->safe($this->asVariable($name), $safe)  . $this->closeVarTag;
+		return $this->openVarTag . $this->escape($this->asVariable($name), $safe)  . $this->closeVarTag;
 	}
 
-	public function safe(string $var, bool $isSafe=false): string {
+	public function escape(string $var, bool $isSafe=false): string {
 		if($isSafe){
 			return $var;
 		}
