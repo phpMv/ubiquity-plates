@@ -4,6 +4,7 @@ namespace Ubiquity\views\engine\plates;
 
 use Ubiquity\utils\base\UArray;
 use Ubiquity\utils\base\UString;
+use Ubiquity\views\engine\twig\TemplateParser;
 
 /**
  * Plates template generator.
@@ -111,7 +112,9 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 	}
 
 	public function parseFromTwig(string $code): string {
-		return '\LatteTools\TwigConverter does not exist!';
+		$parser=new TemplateParser($this);
+		$code = $parser->parseFileContent($code);
+		return $this->postProcess($code);
 	}
 
 }

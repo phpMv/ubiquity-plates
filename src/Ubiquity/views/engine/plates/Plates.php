@@ -3,20 +3,13 @@
 namespace Ubiquity\views\engine\plates;
 
 use League\Plates\Engine;
-use League\Plates\Template\Functions;
-use League\Plates\Template\Template;
-use Ubiquity\cache\CacheManager;
-use Ubiquity\controllers\Router;
 use Ubiquity\controllers\Startup;
-use Ubiquity\core\Framework;
 use Ubiquity\events\EventsManager;
 use Ubiquity\events\ViewEvents;
 use Ubiquity\exceptions\ThemesException;
 use Ubiquity\translation\TranslatorManager;
-use Ubiquity\utils\base\UFileSystem;
 use Ubiquity\themes\ThemesManager;
-use Ubiquity\assets\AssetsManager;
-use Ubiquity\views\View;
+use Ubiquity\views\engine\TemplateEngine;
 use Ubiquity\views\engine\TemplateGenerator;
 /**
  * Ubiquity Plates template engine.
@@ -46,13 +39,11 @@ class Plates extends TemplateEngine {
 		$this->addFunctions();
 
 		$this->addFunction ('t',function ($context, $id, array $parameters = array (), $domain = null, $locale = null) {
-			$trans = TranslatorManager::trans ( $id, $parameters, $domain, $locale );
-			return $trans;
+			return TranslatorManager::trans ( $id, $parameters, $domain, $locale );
 		});
 
 		$this->addFunction ('tc',function ($context, $id, array $choice, array $parameters = array (), $domain = null, $locale = null) {
-			$trans = TranslatorManager::transChoice ( $id, $choice, $parameters, $domain, $locale );
-			return $trans;
+			return TranslatorManager::transChoice ( $id, $choice, $parameters, $domain, $locale );
 		});
 	}
 
@@ -97,7 +88,7 @@ class Plates extends TemplateEngine {
 	}
 
 	public function getGenerator(): ?TemplateGenerator {
-		return null;
+		return new PlatesTemplateGenerator();
 	}
 
 	/**
