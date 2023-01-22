@@ -57,8 +57,9 @@ class Plates extends TemplateEngine {
 	}
 
 	public function render(string $viewName, $pData=null, bool $asString=false) {
-		$viewName = \str_replace('@activeTheme/','',$viewName);
+		$viewName = $this->fixViewName($viewName);
 		$pData ['config'] = Startup::getConfig();
+		$pData ['app'] = $this->fw;
 		EventsManager::trigger(ViewEvents::BEFORE_RENDER, $viewName, $pData);
 		$render = $this->plates->render($viewName, $pData);
 		EventsManager::trigger(ViewEvents::AFTER_RENDER, $render, $viewName, $pData);
@@ -67,6 +68,10 @@ class Plates extends TemplateEngine {
 		} else {
 			echo $render;
 		}
+	}
+
+	protected function fixViewName(string $viewName): string {
+		return \preg_replace('@^(.*?)/@','@$1/',$viewName);
 	}
 
 	public function addFunction(string $name, $callback, array $options=[]): void {
