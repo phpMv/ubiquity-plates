@@ -1,6 +1,6 @@
 <?php
 
-namespace Ubiquity\views\engine;
+namespace Ubiquity\views\engine\plates;
 
 class PlatesTemplate extends \League\Plates\Template\Template {
 	/**

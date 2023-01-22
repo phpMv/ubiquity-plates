@@ -1,6 +1,6 @@
 <?php
 
-namespace Ubiquity\views\engine;
+namespace Ubiquity\views\engine\plates;
 
 use League\Plates\Engine;
 use League\Plates\Template\Functions;
