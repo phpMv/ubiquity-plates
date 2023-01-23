@@ -26,7 +26,7 @@ class Plates extends TemplateEngine {
 
 	public function __construct(array $options = []) {
 
-		$this->plates = new Engine(\ROOT . \DS . 'views' . \DS, 'html');
+		$this->plates = new Engine(\realpath(\ROOT . \DS . 'views' . \DS), 'html');
 		$this->addPath(Startup::getFrameworkDir() . '/../core/views/engines/plates', 'framework');
 
 		if (isset ($options ['activeTheme'])) {
@@ -62,7 +62,7 @@ class Plates extends TemplateEngine {
 	}
 
 	protected function fixViewName(string $viewName): string {
-		return \preg_replace('@^(.*?)/@','@$1::',$viewName);
+		return \rtrim(\preg_replace('@^\@(.*?)/@','@$1::',$viewName), '.html');
 	}
 
 	public function addFunction(string $name, $callback, array $options=[]): void {
@@ -98,7 +98,7 @@ class Plates extends TemplateEngine {
 	 * @param string $namespace The namespace to use
 	 */
 	public function addPath(string $path, string $namespace) {
-		$this->plates->addFolder('@'.\ltrim($namespace,'@'), $path);
+		$this->plates->addFolder('@'.\ltrim($namespace,'@'), \realpath($path));
 	}
 
 	/**

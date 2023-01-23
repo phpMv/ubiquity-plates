@@ -43,7 +43,7 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 			}
 			return $this->openVarTag . $this->escape($this->asVariable($name), $safe) . $this->closeVarTag;
 		}
-		return $this->openVarTag . $name . $this->closeVarTag;
+		return $this->openVarTag . '$this->'.$name . $this->closeVarTag;
 	}
 
 	protected function isAssets(string $name): bool {
