@@ -28,7 +28,7 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 	}
 
 	public function closeBlock(): string {
-		return $this->openExpressionTag . '$this->stop()' . $this->closeExpressionTag;
+		return $this->openVarTag . '$this->stop()' . $this->closeVarTag;
 	}
 
 	public function asArray(array $array): string {
@@ -112,7 +112,7 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 	}
 
 	public function getSelf(): string {
-		return $this->openVarTag . '$this->getName()' . $this->closeVarTag;
+		return $this->openVarTag . '$this->name->getName()' . $this->closeVarTag;
 	}
 
 	private function postProcess(string $code): string {
