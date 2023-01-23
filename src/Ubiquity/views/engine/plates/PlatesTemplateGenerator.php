@@ -104,7 +104,7 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 	}
 
 	public function getSelf(): string {
-		return $this->openVarTag . '$this->getName()' . $this->openVarTag;
+		return $this->openVarTag . '$this->getName()' . $this->closeVarTag;
 	}
 
 	private function postProcess(string $code): string {

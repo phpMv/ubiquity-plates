@@ -26,7 +26,7 @@ class Plates extends TemplateEngine {
 
 	public function __construct(array $options = []) {
 
-		$this->plates = new Engine(\ROOT . \DS . 'views' . \DS, null);
+		$this->plates = new Engine(\ROOT . \DS . 'views' . \DS, 'html');
 		$this->addPath(Startup::getFrameworkDir() . '/../core/views/engines/plates', 'framework');
 
 		if (isset ($options ['activeTheme'])) {
