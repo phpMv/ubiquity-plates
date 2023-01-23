@@ -36,11 +36,19 @@ class PlatesTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 	}
 
 	public function insertVariable(string $name, bool $safe = false): string {
-		$name = \str_replace('.', '->', $name);
-		if (UString::contains('(', $name) && !UString::contains('->', $name)) {
-			return $this->openVarTag . $this->escape($name, $safe) . $this->closeVarTag;
+		if(!$this->isAssets($name)) {
+			$name = \str_replace('.', '->', $name);
+			if (UString::contains('(', $name) && !UString::contains('->', $name)) {
+				return $this->openVarTag . $this->escape($name, $safe) . $this->closeVarTag;
+			}
+			return $this->openVarTag . $this->escape($this->asVariable($name), $safe) . $this->closeVarTag;
 		}
-		return $this->openVarTag . $this->escape($this->asVariable($name), $safe)  . $this->closeVarTag;
+		return $this->openVarTag . $name . $this->closeVarTag;
+	}
+
+	protected function isAssets(string $name): bool {
+		$name=\trim($name);
+		return UString::startswith($name,'css(') || UString::startswith($name,'js(');
 	}
 
 	public function escape(string $var, bool $isSafe=false): string {
