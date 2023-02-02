@@ -45,12 +45,13 @@ class Plates extends TemplateEngine {
 		$this->addFunction ('tc',function ($context, $id, array $choice, array $parameters = array (), $domain = null, $locale = null) {
 			return TranslatorManager::transChoice ( $id, $choice, $parameters, $domain, $locale );
 		});
+
+		$this->plates->addData(['app'=>$this->fw]);
 	}
 
 	public function render(string $viewName, $pData=null, bool $asString=false) {
 		$viewName = $this->fixViewName($viewName);
 		$pData ['config'] = Startup::getConfig();
-		$pData ['app'] = $this->fw;
 		EventsManager::trigger(ViewEvents::BEFORE_RENDER, $viewName, $pData);
 		$render = $this->plates->render($viewName, $pData);
 		EventsManager::trigger(ViewEvents::AFTER_RENDER, $render, $viewName, $pData);
@@ -89,6 +90,10 @@ class Plates extends TemplateEngine {
 
 	public function getGenerator(): ?TemplateGenerator {
 		return new PlatesTemplateGenerator();
+	}
+
+	public function exists(string $viewName): bool {
+		return $this->plates->exists($this->fixViewName($viewName));
 	}
 
 	/**
